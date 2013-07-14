@@ -3,6 +3,8 @@ ac-mozc
 
 ac-mozcは[auto-complete](http://cx4a.org/software/auto-complete/) + [Mozc](http://code.google.com/p/mozc/)で日本語入力するためのEmacsプラグインです。
 
+auto-completeの情報源としてMozcの変換結果を使えるようになります。
+
 全角/半角モードの切り替え無しに、日本語と半角英数字が混ざった文章を楽に書けることを目標にしています。
 
 インストール

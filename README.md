@@ -5,7 +5,12 @@ ac-mozcは[auto-complete](http://cx4a.org/software/auto-complete/) + [Mozc](http
 
 auto-completeの情報源としてMozcの変換結果を使えるようになります。
 
-全角/半角モードの切り替え無しに、日本語と半角英数字が混ざった文章を楽に書けることを目標にしています。
+全角/半角モードの切り替え無しに、日本語と半角英数字が混ざった文章を楽に書けることを目標にしています。（モードレス日本語入力）
+
+Demo Video
+----------
+
+- [ac-mozc - YouTube](http://www.youtube.com/watch?v=O3XpDx8iCKo)
 
 インストール
 ------------
@@ -50,4 +55,4 @@ auto-completeの設定方法は、公式の[Auto Complete Modeユーザーマニ
 注意
 ----
 
-ac-mozcの開発は始まったばかりで、いろいろなものが予告なく変更されます。ご了承下さい。
+ac-mozcはまだ試作段階で、いろいろなものが予告なく変更されます。ご了承下さい。

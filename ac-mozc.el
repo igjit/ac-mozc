@@ -22,7 +22,7 @@
         (backward-char))
     (let ((prefix (ac-prefix-symbol)))
       (if prefix
-          (let ((point (re-search-backward "[^\x0-\x255]" nil t)))
+          (let ((point (re-search-backward "\\Ca" nil t)))
             (if (and point
                      (<= prefix point))
                 (1+ point)

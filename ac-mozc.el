@@ -9,12 +9,6 @@
 (defvar ac-mozc-candidates nil)
 (defvar ac-mozc-ac-point nil)
 
-(defvar ac-source-mozc
-  '((match . ac-mozc-match)
-    (prefix . ac-mozc-prefix)
-    (symbol . "M")
-    (action . ac-mozc-action)))
-
 (defun ac-mozc-prefix ()
   (save-excursion
     (if (memq (char-before) '(?, ?. ?? ?!))
@@ -94,10 +88,11 @@
 (defun ac-mozc-kana-p (str)
   (string-match "^[^ａ-ｚ]+[ｂｃｄｆｇｈｊｋｌｍｎｐｑｒｓｔｖｗｘｙｚ]?[ｙｈ]?$" str))
 
-(defun ac-mozc-complete ()
-  "Start mozc completion at current point."
-  (interactive)
-  (auto-complete '(ac-source-mozc)))
+(ac-define-source mozc
+  '((match . ac-mozc-match)
+    (prefix . ac-mozc-prefix)
+    (symbol . "M")
+    (action . ac-mozc-action)))
 
 (provide 'ac-mozc)
 ;;; ac-mozc.el ends here

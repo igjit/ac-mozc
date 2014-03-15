@@ -21,7 +21,7 @@ ac-mozc.elをダウンロードしてload-pathの通った場所に置いてく�
 
 init.elに以下のように書いてください。
 
-```elisp
+```lisp
 (require 'ac-mozc)
 (define-key ac-mode-map (kbd "C-c C-SPC") 'ac-complete-mozc)
 ```
@@ -29,7 +29,7 @@ init.elに以下のように書いてください。
 auto-completeの情報源 `ac-sources` に ac-mozcを追加すると日本語を入力できるようになります。  
 org-modeにac-mozcを設定する例:
 
-```elisp
+```lisp
 (require 'org)
 (add-to-list 'ac-modes 'org-mode)
 

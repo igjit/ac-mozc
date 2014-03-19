@@ -94,5 +94,24 @@
     (symbol . "M")
     (action . ac-mozc-action)))
 
+(defun ac-mozc-remove-non-ascii-character (words)
+  (mapcan (lambda (x) (split-string x "\\Ca+" t)) words))
+
+(defun ac-mozc-partial-match (string collection)
+  (let ((regex (concat "\\<" string)))
+    (remove-if-not (lambda (x) (string-match-p regex x)) collection)))
+
+(defun ac-mozc-word-candidates-ascii-only (&optional buffer-pred)
+  (let ((ac-match-function 'ac-mozc-partial-match))
+    (ac-mozc-remove-non-ascii-character
+     (ac-word-candidates buffer-pred))))
+
+(ac-define-source ascii-words-in-same-mode-buffers
+  '((prefix . ac-mozc-prefix)
+    (init . ac-update-word-index)
+    (candidates . (ac-mozc-word-candidates-ascii-only
+                   (lambda (buffer)
+                     (derived-mode-p (buffer-local-value 'major-mode buffer)))))))
+
 (provide 'ac-mozc)
 ;;; ac-mozc.el ends here

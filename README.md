@@ -34,13 +34,13 @@ org-modeにac-mozcを設定する例:
 (add-to-list 'ac-modes 'org-mode)
 
 (defun my-ac-mozc-setup ()
-  (delete 'ac-source-words-in-same-mode-buffers ac-sources)
-  (add-to-list 'ac-sources 'ac-source-mozc)
+  (setq ac-sources
+        '(ac-source-mozc ac-source-ascii-words-in-same-mode-buffers))
   (set (make-local-variable 'ac-auto-show-menu) 0.2))
 
 (add-hook 'org-mode-hook 'my-ac-mozc-setup)
 ```
-- ac-source-words-in-same-mode-buffersは日本語入力に不向きなのでac-sourcesから取り除いた方が良いです。
+- ac-source-mozcはMozcの変換結果、ac-source-ascii-words-in-same-mode-buffersはバッファ中の英単語 (ASCII characters) を補完するための情報源です。
 - ac-auto-show-menuは補完メニューが表示されるまでの時間です。お好みの値を設定してください。
 
 auto-completeの設定方法は、公式の[Auto Complete Modeユーザーマニュアル](http://cx4a.org/software/auto-complete/manual.ja.html)も参照して下さい。

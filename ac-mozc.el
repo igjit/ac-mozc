@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;; ac-mozc.el --- An auto-complete source for Mozc
 
-(eval-when-compile (require 'cl))
+(require 'cl)
 (require 'mozc)
 (require 'auto-complete)
 

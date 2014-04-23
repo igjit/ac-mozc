@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 ;;; ac-mozc.el --- An auto-complete source for Mozc
 
-(require 'cl)
+(require 'cl-lib)
 (require 'mozc)
 (require 'auto-complete)
 
@@ -45,14 +45,14 @@
   (let ((size (cdr (assq 'size ac-mozc-candidates))))
     (if (> size 1)
         ;; Get more candidates
-        (loop repeat 4 do (ac-mozc-handle-event 'tab))))
+        (cl-loop repeat 4 do (ac-mozc-handle-event 'tab))))
   (if (not (ac-mozc-kana-p (ac-mozc-pick-preedit ac-mozc-preedit)))
       nil
     (let ((candidates (ac-mozc-pick-candidates ac-mozc-candidates)))
       ;; Cancel selection (C-g)
       (ac-mozc-handle-event ?\^g)
       ;; Henkan (SPC SPC)
-      (loop repeat 2 do (ac-mozc-handle-event ?\s))
+      (cl-loop repeat 2 do (ac-mozc-handle-event ?\s))
       (append candidates (ac-mozc-pick-candidates ac-mozc-candidates)))))
 
 (defun ac-mozc-handle-event (event)
@@ -95,11 +95,11 @@
     (action . ac-mozc-action)))
 
 (defun ac-mozc-remove-non-ascii-character (words)
-  (mapcan (lambda (x) (split-string x "\\Ca+" t)) words))
+  (cl-mapcan (lambda (x) (split-string x "\\Ca+" t)) words))
 
 (defun ac-mozc-partial-match (string collection)
   (let ((regex (concat "\\<" string)))
-    (remove-if-not (lambda (x) (string-match-p regex x)) collection)))
+    (cl-remove-if-not (lambda (x) (string-match-p regex x)) collection)))
 
 (defun ac-mozc-word-candidates-ascii-only (&optional buffer-pred)
   (let ((ac-match-function 'ac-mozc-partial-match))

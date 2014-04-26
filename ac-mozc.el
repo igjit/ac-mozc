@@ -1,10 +1,10 @@
-;;; ac-mozc.el --- auto-complete sources for Japanese input using Mozc  -*- coding: utf-8; -*-
+;;; ac-mozc.el --- auto-complete sources for Japanese input using Mozc
 
 ;; Copyright (C) 2014 igjit
 
 ;; Author: igjit <igjit1@gmail.com>
 ;; URL: https://github.com/igjit/ac-mozc
-;; Version: 0.0.0
+;; Version: 0.0.1
 ;; Package-Requires: ((cl-lib "0.5") (auto-complete "1.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -135,4 +135,10 @@
                      (derived-mode-p (buffer-local-value 'major-mode buffer)))))))
 
 (provide 'ac-mozc)
+
+;; Local Variables:
+;; coding: utf-8
+;; indent-tabs-mode: nil
+;; End:
+
 ;;; ac-mozc.el ends here

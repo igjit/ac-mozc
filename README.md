@@ -26,7 +26,7 @@ init.elに以下のように書いてください。
 (define-key ac-mode-map (kbd "C-c C-SPC") 'ac-complete-mozc)
 ```
 
-auto-completeの情報源 `ac-sources` に ac-mozcを追加すると日本語を入力できるようになります。  
+auto-completeの情報源 `ac-sources` に `ac-source-mozc` を追加すると日本語を入力できるようになります。  
 org-modeにac-mozcを設定する例:
 
 ```lisp

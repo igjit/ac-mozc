@@ -31,8 +31,10 @@
 (defvar ac-mozc-ac-point nil)
 
 (defun ac-mozc-prefix ()
-  (if (re-search-backward "\\(?:^\\|[^a-zA-Z-,.!?]\\)\\([a-zA-Z-,.!?]+\\)\\=" nil t)
-      (match-beginning 1)))
+  (save-excursion
+    (if (re-search-backward "\\(?:^\\|[^a-zA-Z-,.!?]\\)\\([a-zA-Z-,.!?]+\\)\\="
+                            (line-beginning-position) t)
+        (match-beginning 1))))
 
 (defadvice ac-cleanup (before ac-mozc-before-cleanup-advice activate)
   (setq ac-mozc-ac-point ac-point))

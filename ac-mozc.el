@@ -31,17 +31,8 @@
 (defvar ac-mozc-ac-point nil)
 
 (defun ac-mozc-prefix ()
-  (save-excursion
-    (if (memq (char-before) '(?, ?. ?? ?!))
-        ;; Include punctuation
-        (backward-char))
-    (let ((prefix (ac-prefix-symbol)))
-      (if prefix
-          (let ((point (re-search-backward "\\Ca" nil t)))
-            (if (and point
-                     (<= prefix point))
-                (1+ point)
-              prefix))))))
+  (if (re-search-backward "\\(?:^\\|[^a-zA-Z-,.!?]\\)\\([a-zA-Z-,.!?]+\\)\\=" nil t)
+      (match-beginning 1)))
 
 (defadvice ac-cleanup (before ac-mozc-before-cleanup-advice activate)
   (setq ac-mozc-ac-point ac-point))

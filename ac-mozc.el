@@ -92,7 +92,7 @@
       nil))))
 
 (defun ac-mozc-pick-preedit (preedit)
-  (cdr (assq 'value (cadr (assq 'segment preedit)))))
+  (cdr (assq 'key (cadr (assq 'segment preedit)))))
 
 (defun ac-mozc-pick-candidates (candidates)
   (mapcar

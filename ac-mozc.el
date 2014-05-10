@@ -56,17 +56,11 @@
   (mozc-clean-up-session)
   ;; Send word
   (mapc 'ac-mozc-handle-event (string-to-vector word))
-  (let ((size (cdr (assq 'size ac-mozc-candidates))))
-    (if (> size 1)
-        ;; Get more candidates
-        (cl-loop repeat 4 do (ac-mozc-handle-event 'tab))))
   (if (not (ac-mozc-kana-p (ac-mozc-pick-preedit ac-mozc-preedit)))
       nil
     (let ((candidates (ac-mozc-pick-candidates ac-mozc-candidates)))
-      ;; Cancel selection (C-g)
-      (ac-mozc-handle-event ?\^g)
-      ;; Henkan (SPC SPC)
-      (cl-loop repeat 2 do (ac-mozc-handle-event ?\s))
+      ;; Convert (SPC)
+      (ac-mozc-handle-event ?\s)
       (append candidates (ac-mozc-pick-candidates ac-mozc-candidates)))))
 
 (defun ac-mozc-handle-event (event)
@@ -81,7 +75,11 @@
      ;; consumed
      ((mozc-protobuf-get output 'consumed)
       (let ((preedit (mozc-protobuf-get output 'preedit))
-            (candidates (mozc-protobuf-get output 'candidates)))
+            (candidates
+             (list (cons 'candidate
+                         (mozc-protobuf-get output
+                                            'all-candidate-words
+                                            'candidates)))))
         (setq ac-mozc-preedit preedit
               ac-mozc-candidates candidates)
         t))

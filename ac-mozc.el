@@ -75,11 +75,8 @@
      ;; consumed
      ((mozc-protobuf-get output 'consumed)
       (let ((preedit (mozc-protobuf-get output 'preedit))
-            (candidates
-             (list (cons 'candidate
-                         (mozc-protobuf-get output
-                                            'all-candidate-words
-                                            'candidates)))))
+            (candidates (ac-mozc-all-candidate-words-to-candidates
+                         (mozc-protobuf-get output 'all-candidate-words))))
         (setq ac-mozc-preedit preedit
               ac-mozc-candidates candidates)
         t))
@@ -88,6 +85,9 @@
       (setq ac-mozc-preedit nil
             ac-mozc-candidates nil)
       nil))))
+
+(defun ac-mozc-all-candidate-words-to-candidates (all-candidate-words)
+  (list (cons 'candidate (cdr (assq 'candidates all-candidate-words)))))
 
 (defun ac-mozc-pick-preedit (preedit)
   (cdr (assq 'key (cadr (assq 'segment preedit)))))

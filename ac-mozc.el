@@ -29,6 +29,7 @@
 (defvar ac-mozc-preedit nil)
 (defvar ac-mozc-candidates nil)
 (defvar ac-mozc-ac-point nil)
+(defvar ac-mozc-sending nil)
 
 (defun ac-mozc-prefix ()
   (save-excursion
@@ -50,7 +51,11 @@
   (setq ac-mozc-ac-point nil))
 
 (defun ac-mozc-match (ac-prefix candidates)
-  (ac-mozc-send-word ac-prefix))
+  (if ac-mozc-sending
+      nil
+    (setq ac-mozc-sending t)
+    (unwind-protect (ac-mozc-send-word ac-prefix)
+      (setq ac-mozc-sending nil))))
 
 (defun ac-mozc-send-word (word)
   (mozc-clean-up-session)

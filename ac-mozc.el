@@ -26,6 +26,19 @@
 (require 'mozc)
 (require 'auto-complete)
 
+(defgroup ac-mozc nil
+  "Auto-complete sources for Japanese input using Mozc."
+  :group 'auto-complete
+  :prefix "ac-mozc-")
+
+(defcustom ac-mozc-remove-space t
+  "Non-nil if a space between two alphanumeric strings should be removed.
+When a translated Japanese word is selected and it follows an
+alphanumeric string and a space, the space in between is removed. To
+stop this behavior, set this variable to nil."
+  :type 'boolean
+  :group 'ac-mozc)
+
 (defvar ac-mozc-preedit nil)
 (defvar ac-mozc-candidates nil)
 (defvar ac-mozc-ac-point nil)
@@ -41,13 +54,14 @@
   (setq ac-mozc-ac-point ac-point))
 
 (defun ac-mozc-action ()
-  (save-excursion
-    (goto-char ac-mozc-ac-point)
-    (let ((str (buffer-substring-no-properties
-                (max (point-at-bol) (- (point) 2))
-                (point))))
-      (if (string-match "\\w " str)
-          (backward-delete-char 1))))
+  (if ac-mozc-remove-space
+      (save-excursion
+        (goto-char ac-mozc-ac-point)
+        (let ((str (buffer-substring-no-properties
+                    (max (point-at-bol) (- (point) 2))
+                    (point))))
+          (if (string-match "\\w " str)
+              (backward-delete-char 1)))))
   (setq ac-mozc-ac-point nil))
 
 (defun ac-mozc-match (ac-prefix candidates)

@@ -4,7 +4,7 @@
 
 ;; Author: igjit <igjit1@gmail.com>
 ;; URL: https://github.com/igjit/ac-mozc
-;; Version: 0.0.2
+;; Version: 0.0.3
 ;; Package-Requires: ((cl-lib "0.5") (auto-complete "1.4"))
 
 ;; This program is free software; you can redistribute it and/or modify
